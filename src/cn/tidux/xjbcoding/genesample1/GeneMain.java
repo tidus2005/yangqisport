@@ -84,7 +84,8 @@ public class GeneMain extends JFrame {
             nextGenUnits = choose(units);
 
             //交叉
-            nextGenUnits = cross(units);
+            nextGenUnits = cross(units); 
+            //sss
 
             //变异
             //nextGenUnits = genovariation(units);
