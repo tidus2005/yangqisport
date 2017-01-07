@@ -15,20 +15,15 @@ package cn.tidux.xjbcoding.genesample1;
  * accordance with the terms of the license agreement you entered into
  * with Alibaba.com.
  */
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
- * TODO Comment of GeneMain
+ * TODO Comment of GeneMain xxxx
  * 
  * @author Administrator
  */
@@ -84,7 +79,7 @@ public class GeneMain extends JFrame {
             nextGenUnits = choose(units);
 
             //交叉
-            nextGenUnits = cross(units); 
+            nextGenUnits = cross(units);
             //sss
 
             //变异
