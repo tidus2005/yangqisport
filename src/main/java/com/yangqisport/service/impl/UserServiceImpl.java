@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import weibo4j.Users;
-import weibo4j.examples.oauth2.Log;
-import weibo4j.model.WeiboException;
+//import weibo4j.Users;
+//import weibo4j.examples.oauth2.Log;
+//import weibo4j.model.WeiboException;
 
 import com.yangqisport.dal.dataobject.User;
 import com.yangqisport.dal.dataobject.UserExample;
@@ -142,30 +142,30 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(platform);
         UserDO userDO = new UserDO();
         User user = null;
-        if (platform.equals("weibo")) {
-            weibo4j.model.User weiboUser = getWeiboUserInfo(authString);
-            userDO.setAvatar(weiboUser.getProfileImageUrl());
-            userDO.setBindAcctWeibo(weiboUser.getId());
-            userDO.setNickname(weiboUser.getName());
-            userDO.setLoginId("weibo_" + weiboUser.getId());
-            userDO.setSex(weiboUser.getGender());
-            userDO.setMemo(weiboUser.getDescription());
-            userDO.setRegion(weiboUser.getLocation());
-
-            UserExample userExample = new UserExample();
-            userExample.createCriteria().andBindAcctWeiboEqualTo(weiboUser.getId());
-            user = CollectionUtilsX.unique(userMapper.selectByExample(userExample));
-            if (user == null) {
-                user = new User();
-                BeanUtils.copyProperties(userDO, user);
-                userMapper.insertSelective(user);
-                userDO.setId(user.getId());
-            } else {
-                BeanUtils.copyProperties(user, userDO);
-            }
-        } else {
-            throw new BusinessException(ErrorCode.USER_LOGIN_AUTH_FAIL, "登陆失败，三方平台校验错误");
-        }
+//        if (platform.equals("weibo")) {
+//            weibo4j.model.User weiboUser = getWeiboUserInfo(authString);
+//            userDO.setAvatar(weiboUser.getProfileImageUrl());
+//            userDO.setBindAcctWeibo(weiboUser.getId());
+//            userDO.setNickname(weiboUser.getName());
+//            userDO.setLoginId("weibo_" + weiboUser.getId());
+//            userDO.setSex(weiboUser.getGender());
+//            userDO.setMemo(weiboUser.getDescription());
+//            userDO.setRegion(weiboUser.getLocation());
+//
+//            UserExample userExample = new UserExample();
+//            userExample.createCriteria().andBindAcctWeiboEqualTo(weiboUser.getId());
+//            user = CollectionUtilsX.unique(userMapper.selectByExample(userExample));
+//            if (user == null) {
+//                user = new User();
+//                BeanUtils.copyProperties(userDO, user);
+//                userMapper.insertSelective(user);
+//                userDO.setId(user.getId());
+//            } else {
+//                BeanUtils.copyProperties(user, userDO);
+//            }
+//        } else {
+//            throw new BusinessException(ErrorCode.USER_LOGIN_AUTH_FAIL, "登陆失败，三方平台校验错误");
+//        }
 
         return userDO;
     }
@@ -176,26 +176,26 @@ public class UserServiceImpl implements UserService {
      * @param accessToken
      * @return
      */
-    private weibo4j.model.User getWeiboUserInfo(String authString) {
-        String accessToken = null;
-        String uid = null;
-        try {
-            accessToken = authString.split(",")[0];
-            uid = authString.split(",")[1];
-        } catch (Exception ex) {
-            throw new BusinessException(ErrorCode.USER_LOGIN_LOGIN_FAILED,
-                    "微博平台authString格式错误！正确为 accessToken,uid");
-        }
-
-        Users um = new Users(accessToken);
-        try {
-            weibo4j.model.User user = um.showUserById(uid);
-            Log.logInfo(user.toString());
-            return user;
-        } catch (WeiboException e) {
-            throw new BusinessException(ErrorCode.USER_LOGIN_LOGIN_FAILED,e.getMessage());
-        }
-    }
+//    private weibo4j.model.User getWeiboUserInfo(String authString) {
+//        String accessToken = null;
+//        String uid = null;
+//        try {
+//            accessToken = authString.split(",")[0];
+//            uid = authString.split(",")[1];
+//        } catch (Exception ex) {
+//            throw new BusinessException(ErrorCode.USER_LOGIN_LOGIN_FAILED,
+//                    "微博平台authString格式错误！正确为 accessToken,uid");
+//        }
+//
+//        Users um = new Users(accessToken);
+//        try {
+//            weibo4j.model.User user = um.showUserById(uid);
+//            Log.logInfo(user.toString());
+//            return user;
+//        } catch (WeiboException e) {
+//            throw new BusinessException(ErrorCode.USER_LOGIN_LOGIN_FAILED,e.getMessage());
+//        }
+//    }
 
     @Override
     public void settingUserInterestActivity(Long userId, List<ActivityItemDO> interestActivityItems) {
